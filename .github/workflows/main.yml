@@ -18,14 +18,15 @@ jobs:
       with:
         auto-update-conda: true
         python-version: "3.10"
-        activate-environment: ""
 
     - name: Install dependencies
+      shell: bash -l {0}
       run: |
         pip install mlflow==2.19.0
         pip install scikit-learn pandas
 
     - name: Run MLflow Project
+      shell: bash -l {0}
       run: |
         cd MLProject
         mlflow run .
