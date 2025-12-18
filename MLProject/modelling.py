@@ -17,7 +17,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Set experiment
-mlflow.set_experiment("CI Basic Training")
+mlflow.set_experiment("CI Advance Training")
 
 # autolog
 mlflow.sklearn.autolog()
