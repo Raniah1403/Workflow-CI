@@ -43,12 +43,18 @@ jobs:
       run: |
         cd MLProject
         mlflow run .
+    - name: Get latest MLflow run_id
+      run: |
+        cd MLProject
+        RUN_ID=$(ls -td mlruns/0/* | head -n 1 | xargs basename)
+        echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
+        echo "Latest run_id: $RUN_ID"
 
     - name: Build Docker Image
       run: |
         cd MLProject
         mlflow models build-docker \
-          -m runs:/0/model \
+          -m "file://$GITHUB_WORKSPACE/MLProject/mlruns/0/$RUN_ID/artifacts/model" \
           -n raniahzaa/loan-approval-mlflow
 
     - name: Push Docker Image
