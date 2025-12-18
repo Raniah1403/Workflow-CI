@@ -13,30 +13,27 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Miniconda
-      uses: conda-incubator/setup-miniconda@v3
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
-        auto-update-conda: true
         python-version: "3.10"
 
-    - name: Install MLflow
-      run: pip install mlflow==2.19.0
-
-    - name: Run MLflow Project
+    - name: Install dependencies
       run: |
-        cd MLProject
-        mlflow run .
-
-    - name: Build Docker Image with MLflow
-      run: |
-        cd MLProject
-        mlflow models build-docker \
-          -m runs:/0/model \
-          -n raniahzaa/loan-approval-mlflow
+        pip install mlflow==2.22.4
+        pip install scikit-learn pandas
 
     - name: Login to Docker Hub
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login \
            -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+    - name: Run MLflow Project & Build Docker Image
+      run: |
+        cd MLProject
+        mlflow run . \
+          --env-manager=local \
+          --build-image \
+          --docker-image-name raniahzaa/loan-approval-mlflow
 
     - name: Push Docker Image
       run: docker push raniahzaa/loan-approval-mlflow
