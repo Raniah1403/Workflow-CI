@@ -24,12 +24,17 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Run MLflow Project & Build Docker Image
+    - name: Run MLflow Project 
       run: |
         cd MLProject
-        mlflow run . \
-          --build-image \
-          --docker-image-name raniahzaa/loan-approval-mlflow
+        mlflow run .
+    
+    - name: Build Docker Image from MLflow model
+      run: |
+        cd MLProject
+        mlflow models build-docker \
+          -m runs:/0/model \
+          -n raniahzaa/loan-approval-mlflow
 
     - name: Push Docker Image
       run: docker push raniahzaa/loan-approval-mlflow
