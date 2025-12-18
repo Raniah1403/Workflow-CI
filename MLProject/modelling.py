@@ -22,11 +22,10 @@ mlflow.set_experiment("CI Basic Training")
 # autolog
 mlflow.sklearn.autolog()
 
-with mlflow.start_run():
-    model = LogisticRegression(max_iter=1000)
-    model.fit(X_train, y_train)
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
 
-    y_pred = model.predict(X_test)
-    acc = accuracy_score(y_test, y_pred)
+y_pred = model.predict(X_test)
+acc = accuracy_score(y_test, y_pred)
 
-    print(f"Accuracy: {acc}")
+print(f"Accuracy: {acc}")
