@@ -1,5 +1,6 @@
 name: loan-approval-ci
-
+permissions:
+  contents: write
 on:
   push:
     branches: 
@@ -56,7 +57,7 @@ jobs:
     - name: Save MLflow artifacts to Github
       run: |
         git config --global user.name "github-actions"
-        git config --global user.email "raniahmrz14@gmail.com"
+        git config --global user.email "github-actions@github.com"
         git add MLProject/mlruns
         git commit -m "Save MLflow artifacts from CI" || echo "No changes"
         git push 
