@@ -1,0 +1,27 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+mlflow_version: 2.19.0
+model_size_bytes: 896
+model_uuid: fb3241b3c28748bfa27edaac4faf6a24
+run_id: 2dcbc5d91d6f4081a15fe954c1e8315e
+signature:
+  inputs: '[{"type": "double", "name": "income", "required": true}, {"type": "double",
+    "name": "credit_score", "required": true}, {"type": "double", "name": "loan_amount",
+    "required": true}, {"type": "double", "name": "years_employed", "required": true},
+    {"type": "double", "name": "points", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+utc_time_created: '2025-12-19 01:38:35.686561'

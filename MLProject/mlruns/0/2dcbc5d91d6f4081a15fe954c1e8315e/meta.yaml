@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/MLProject/mlruns/0/2dcbc5d91d6f4081a15fe954c1e8315e/artifacts
+end_time: 1766108321002
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2dcbc5d91d6f4081a15fe954c1e8315e
+run_name: redolent-colt-170
+run_uuid: 2dcbc5d91d6f4081a15fe954c1e8315e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766108262424
+status: 3
+tags: []
+user_id: runner
