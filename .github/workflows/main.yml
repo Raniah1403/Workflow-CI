@@ -2,7 +2,10 @@ name: loan-approval-ci
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - main 
+    paths-ignore: 
+      - 'MLProject/mlruns/**'
   workflow_dispatch:
 
 jobs:
@@ -39,7 +42,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Run MLflow Project (conda)
+    - name: Run MLflow Project
       run: |
         cd MLProject
         mlflow run .
@@ -49,6 +52,14 @@ jobs:
         RUN_ID=$(ls -td mlruns/0/* | head -n 1 | xargs basename)
         echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
         echo "Latest run_id: $RUN_ID"
+    
+    - name: Save MLflow artifacts to Github
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "raniahmrz14@gmail.com"
+        git add MLProject/mlruns
+        git commit -m "Save MLflow artifacts from CI" || echo "No changes"
+        git push 
 
     - name: Build Docker Image
       run: |
